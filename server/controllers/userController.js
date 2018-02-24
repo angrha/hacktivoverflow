@@ -1,4 +1,4 @@
-const User   = require('../models/userModel')
+const User   = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt    = require('jsonwebtoken');
 
@@ -13,65 +13,102 @@ class UserController {
         user: users
       })
     })
-    .catch(err => res.status(500).send(err))
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
   }
 
   static createUser(req, res){
     let objUser = {
+      username: req.body.username,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, salt),
-      status: req.body.status || 'user'
+      password: req.body.password,
+      status: req.body.status
     }
 
     let user = new User(objUser)
     user.save()
-    .then(dataUser => {
-      res.status(200).json({
-        message: 'new user created!',
-        user: dataUser
+      .then(dataUser => {
+        res.status(200).json({
+          message: 'new user created!',
+          user: dataUser
+        })
       })
-    })
-    .catch(err => res.status(500).send(err))
+      .catch(err => {
+        console.log(err)
+        res.status(500).send(err)
+      })
+  }
+
+  static getUserProfile(req, res) {
+    User.findById(req.decoded.id)
+      .then(user => {
+        if (!user) {
+          return res.status(400).json({
+            msg: `can't find this user`
+          })
+        }
+        res.status(200).json({
+          msg: 'find one user',
+          userId: user._id,
+          username: user.username
+        })
+        .catch(err => {
+          console.log(err)
+          res.status(500).send(err)
+        })
+      })
   }
 
   // middleware on
   static updateUser(req, res) {
     User.findOne({
-      _id: req.params.id,
-      // email: req.decoded.email
+      _id: req.params.id
     })
-    .then(user => {
-      user.email = req.body.email || user.email,
-      user.password = req.body.password || user.password,
-      user.status   = req.body.status || user.status,
+      .then(user => {
+        user.username = req.body.username || user.username
+        user.email = req.body.email || user.email,
+        user.password = req.body.password || user.password,
+        user.status   = req.body.status || user.status,
 
-      user.save()
-      .then( updatedUser => {
-        res.status(200).json({
-          message: 'user updated',
-          user: updatedUser
-        })
+        user.save()
+          .then(updatedUser => {
+            res.status(200).json({
+              message: 'user updated',
+              user: updatedUser
+            })
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+          })
       })
-      .catch(err => res.status(500).send(err))
-    })
-    .catch(err => res.status(500).send(err))
+      .catch(err => {
+        console.log(err)
+        res.status(500).send(err)
+      })
   }
 
   static deleteUser(req, res) {
     User.findByIdAndRemove(req.params.id)
-    .then(user => {
-      res.status(200).json({
-        message : 'deleted',
-        user : user
+      .then(user => {
+        res.status(200).json({
+          message : 'deleted',
+          user : user
+        })
       })
-    })
-    .catch(err => res.status(500).send(err))
+      .catch(err => {
+        console.log(err)
+        res.status(500).send(err)
+      })
   }
 
   static register(req, res){
     let objUser = {
+      username: req.body.username,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, salt)
+      password: req.body.password
     }
 
     let user = new User(objUser)
@@ -90,21 +127,22 @@ class UserController {
     User.findOne({
       email: req.body.email
     })
-    .then( user => {
+    .then(user => {
       if(!user) {
         res.status(403).json({
-          message: 'username not found'
+          message: 'email or username not found'
         })
       }
 
       if(!bcrypt.compareSync(req.body.password, user.password)) {
         res.status(403).json({ 
-          message: 'invalid username or password'
+          message: 'invalid email or password'
         })
       }
 
       let payload = {
         id       : user._id,
+        username : user.username,
         email    : user.email,
         status   : user.status
       }
@@ -113,13 +151,17 @@ class UserController {
         if(!err) {
           res.status(200).json({
             message : 'authentication valid!',
-            userId  : user._id,
+            userId: user._id,
+            username : user.username,
             token   : token
           })
         }
       })
     })
-    .catch(err => res.status(401).send(err)) 
+    .catch(err => {
+      console.log(err)
+      res.status(401).send(err)
+    }) 
   }
 
 }

@@ -12,7 +12,7 @@
         dark
         slot="activator"
         class="btn"
-      >See More...
+      > Let's Share
       </v-btn>
       <v-card>
         <v-list>
@@ -38,7 +38,7 @@
         </v-list>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat @click="goHome">Go to Home</v-btn>
+          <v-btn flat @click="goHome">Continue</v-btn>
           <v-btn color="indigo darken-4" flat @click="setSignin(formData)">Sign In</v-btn>
         </v-card-actions>
       </v-card>

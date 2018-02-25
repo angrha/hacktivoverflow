@@ -12,7 +12,7 @@
         dark
         slot="activator"
         class="btn"
-      >Sign In
+      >See More...
       </v-btn>
       <v-card>
         <v-list>
@@ -38,8 +38,8 @@
         </v-list>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn color="indigo darken-4" flat @click="setSignin(formData)">Save</v-btn>
+          <v-btn flat @click="goHome">Go to Home</v-btn>
+          <v-btn color="indigo darken-4" flat @click="setSignin(formData)">Sign In</v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -74,6 +74,11 @@ export default {
           this.formData.password = ''
           this.menu = false
         })
+        .catch(err => console.log(err))
+    },
+    goHome () {
+      this.menu = false
+      this.$router.push({name: 'Home'})
     }
   }
 }
@@ -82,7 +87,7 @@ export default {
 <style scoped>
 .btn {
   margin-left: 3px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 </style>

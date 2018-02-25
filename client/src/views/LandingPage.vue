@@ -7,6 +7,7 @@
           <span class="subheading">Over 50 million developers come to Hacktiv Overflow to learn, share their knowledge, and build their careers.</span>
           <v-divider class="my-3"></v-divider>
           <div class="title mb-3">Join to Developer Community!</div>
+          <!-- Sign in && Sign Up -->
           <div class="flx-btn">
             <SignIn/>
             <SignUp/>

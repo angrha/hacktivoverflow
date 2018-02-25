@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-// import router from '../router'
+import router from '../router'
 import swal from 'sweetalert'
 
 Vue.use(Vuex)
@@ -24,7 +24,7 @@ const store = new Vuex.Store({
         .then(response => {
           localStorage.setItem(overflow, response.data.token)
           commit('isLogin', true)
-          // router.push({name: 'Home'})
+          router.push({name: 'Home'})
         })
         .catch(err => {
           swal({

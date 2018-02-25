@@ -47,7 +47,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn color="brown darken-2" flat @click="register(formData)">Save</v-btn>
+          <v-btn color="brown darken-2" flat @click="register(formData)">Sign Up</v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -88,6 +88,7 @@ export default {
           this.formData.password = ''
           this.menu = false
         })
+        .catch(err => console.log(err))
     }
   }
 }

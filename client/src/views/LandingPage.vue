@@ -2,12 +2,15 @@
   <div>
     <v-container class="wrap-banner">
       <v-layout align-center class="main-title">
-        <v-flex xs6>
-          <h3 class="display-3">Welcome to the site</h3>
-          <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
+        <v-flex sm6>
+          <h3 class="display-3">Learn, Share, Build</h3>
+          <span class="subheading">Over 50 million developers come to Hacktiv Overflow to learn, share their knowledge, and build their careers.</span>
           <v-divider class="my-3"></v-divider>
-          <div class="title mb-3">Check out our newest features!</div>
-          <v-btn large color="primary" class="mx-0">See more</v-btn>
+          <div class="title mb-3">Join to Developer Community!</div>
+          <div class="flx-btn">
+            <SignIn/>
+            <SignUp/>
+          </div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -33,7 +36,13 @@
 </template>
 
 <script>
+import SignUp from '@/components/SignUp'
+import SignIn from '@/components/SignIn'
 export default {
+  components: {
+    SignIn,
+    SignUp
+  }
 }
 </script>
 
@@ -60,5 +69,11 @@ export default {
 .main-title {
   color: #fff;
   z-index: 999;
+}
+
+.flx-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start
 }
 </style>

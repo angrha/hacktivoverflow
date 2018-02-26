@@ -102,7 +102,7 @@ class QuestionController {
     })
   }
 
-  // insert answer with put question
+  // insert answer in question
   static insertAnswer(req, res) {
     Question.findById(req.params.id)
       .then(question => {
@@ -113,6 +113,7 @@ class QuestionController {
         })
         answer.save()
           .then(answerResult => {
+            // push answer id to answers
             question.answers.push(answerResult._id)
             question.save()
               .then(insertedAnswer => {
@@ -136,6 +137,7 @@ class QuestionController {
         res.send(err)
       })
   }
+  
 }
 
 module.exports = QuestionController

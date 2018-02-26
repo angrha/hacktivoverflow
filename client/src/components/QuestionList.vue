@@ -11,7 +11,10 @@
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-list-tile-action-text>{{ question.author.username }}</v-list-tile-action-text>
-                <v-icon color="grey lighten-1">star_border</v-icon>
+                <div style="display: flex; justify-content: space-between;">
+                <v-icon color="yellow lighten-2" style="margin-right: 5px;">fas fa-thumbs-up</v-icon>
+                <v-icon color="yellow lighten-2" style="margin-left: 5px;">fas fa-thumbs-down</v-icon>
+                </div>
               </v-list-tile-action>
             </v-list-tile>
             <v-divider v-if="index + 1 < questions.length" :key="`divider-${index}`"></v-divider>

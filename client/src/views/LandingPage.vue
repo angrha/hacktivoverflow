@@ -3,7 +3,7 @@
     <v-container class="wrap-banner">
       <v-layout align-center class="main-title">
         <v-flex sm6>
-          <h3 class="display-3">Learn, Share, Build</h3>
+          <h3 class="display-3 fnt">Learn, Share, Build</h3>
           <span class="subheading">Over 50 million developers come to Hacktiv Overflow to learn, share their knowledge, and build their careers.</span>
           <v-divider class="my-3"></v-divider>
           <div class="title mb-3">Join to Developer Community!</div>
@@ -22,7 +22,7 @@
       shapeType="circle"
       :particleSize="3"
       linesColor="#dedede"
-      :linesWidth="1"
+      :linesWidth="2"
       :lineLinked="true"
       :lineOpacity="0.4"
       :linesDistance="150"
@@ -48,6 +48,10 @@ export default {
 </script>
 
 <style scoped>
+.fnt {
+  font-family: serif;
+}
+
 .wrap-banner {
   margin-top: 5%;
   position: relative;

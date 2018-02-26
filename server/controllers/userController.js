@@ -68,9 +68,9 @@ class UserController {
     })
       .then(user => {
         user.username = req.body.username || user.username
-        user.email = req.body.email || user.email,
-        user.password = req.body.password || user.password,
-        user.status   = req.body.status || user.status,
+        user.email = req.body.email || user.email
+        user.password = req.body.password || user.password
+        user.status   = req.body.status || user.status
 
         user.save()
           .then(updatedUser => {

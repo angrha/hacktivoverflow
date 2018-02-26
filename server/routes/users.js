@@ -5,7 +5,7 @@ const isLogin = require('../helper/authentication')
 const isAdmin = require('../helper/authorization')
 const isSelf  = require('../helper/authOwnOrAdm')
 
-router.get('/', isLogin, isAdmin, User.findAll)
+router.get('/',isLogin, isAdmin, User.findAll)
 router.post('/', isLogin, isAdmin, User.createUser)
 router.get('/user', isLogin, User.getUserProfile)
 router.put('/:id', isLogin, isSelf, User.updateUser)

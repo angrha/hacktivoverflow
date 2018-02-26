@@ -19,4 +19,4 @@ const answerSchema = new Schema({
 
 const Answer = mongoose.model('Answer', answerSchema)
 
-module.export = Answer
+module.exports = Answer

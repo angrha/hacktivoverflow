@@ -14,6 +14,7 @@ const questionSchema = new Schema({
     type: String,
     required: [true, 'insert your description']
   },
+  tag: Array,
   answers: [{
     type: Schema.Types.ObjectId,
     ref: 'Answer'

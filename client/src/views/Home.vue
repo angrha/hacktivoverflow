@@ -2,18 +2,27 @@
   <div class="bg-home">
     <Navbar/>
     <v-container fluid>
-      <QuestionList/>
+      <router-view></router-view>
     </v-container>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Navbar from '@/components/Navbar'
-import QuestionList from '@/components/QuestionList'
 export default {
   components: {
-    Navbar,
-    QuestionList
+    Navbar
+  },
+  methods: {
+    ...mapActions([
+      'checkLogin',
+      'getAllQuestion'
+    ])
+  },
+  created () {
+    this.checkLogin()
+    this.getAllQuestion()
   }
 }
 </script>

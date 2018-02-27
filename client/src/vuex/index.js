@@ -24,6 +24,9 @@ const store = new Vuex.Store({
     },
     LOAD_DETAIL_QUESTION (state, payload) {
       state.detailQuestion = payload
+    },
+    SEND_QUESTION (state, payload) {
+      state.questions.push(payload)
     }
   },
   actions: {
@@ -91,6 +94,25 @@ const store = new Vuex.Store({
         .then(response => {
           console.log('sadklsakdlsald', response.data.question)
           commit('LOAD_DETAIL_QUESTION', response.data.question)
+        })
+        .catch(err => {
+          swal({
+            text: `${err}`,
+            icon: 'error',
+            button: 'next'
+          })
+          console.log(err)
+        })
+    },
+    addQuestion ({ commit }, payload) {
+      axios.post(baseUrl + '/questions', payload, {
+        headers: {
+          token: localStorage.getItem(overflow)
+        }
+      })
+        .then(response => {
+          console.log(response.data.question, 'ini questionssndsandsadsa')
+          commit('SEND_QUESTION', response.data.question)
         })
         .catch(err => {
           swal({

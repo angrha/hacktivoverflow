@@ -1,5 +1,5 @@
 <template>
- <v-layout flex sm8>
+ <v-layout flex xs12 sm8>
     <v-flex xs12>
       <v-card>
         <v-list two-line>

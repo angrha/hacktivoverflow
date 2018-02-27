@@ -27,6 +27,12 @@ const store = new Vuex.Store({
     },
     SEND_QUESTION (state, payload) {
       state.questions.push(payload)
+    },
+    PROCESS_DELETE (state, payload) {
+      let index = state.questions.findIndex(x => {
+        return x === payload
+      })
+      console.log(index, 'ini index')
     }
   },
   actions: {
@@ -89,10 +95,8 @@ const store = new Vuex.Store({
         })
     },
     getDetailQuestion ({ commit }, id) {
-      console.log(id, 'ini ideeee')
       axios.get(baseUrl + `/questions/${id}`)
         .then(response => {
-          console.log('sadklsakdlsald', response.data.question)
           commit('LOAD_DETAIL_QUESTION', response.data.question)
         })
         .catch(err => {
@@ -111,7 +115,6 @@ const store = new Vuex.Store({
         }
       })
         .then(response => {
-          console.log(response.data.question, 'ini questionssndsandsadsa')
           commit('SEND_QUESTION', response.data.question)
         })
         .catch(err => {
@@ -124,14 +127,42 @@ const store = new Vuex.Store({
         })
     },
     addAnswer ({ commit }, payload) {
-      console.log(payload.id, 'ini patlsaidjsad id')
-      axios.put(baseUrl + `/questions/${payload.id}/answer`, payload.answer, {
+      axios.put(baseUrl + `/questions/${payload.id}/answer`, {
+        answer: payload.answer
+      }, {
         headers: {
           token: localStorage.getItem(overflow)
         }
       })
         .then(response => {
-          console.log(response.data.answer, 'ini jawaban sodara')
+          console.log(response.data.question, 'ini jawaban sodara')
+          commit('LOAD_DETAIL_QUESTION', response.data.question)
+        })
+        .catch(err => {
+          swal({
+            text: `${err}`,
+            icon: 'error',
+            button: 'next'
+          })
+          console.log(err)
+        })
+    },
+    delQuestion ({ commit }, id) {
+      console.log(id, 'ini id question')
+      axios.delete(baseUrl + `/questions/${id}`, {
+        headers: {
+          token: localStorage.getItem(overflow)
+        }
+      })
+        .then(response => {
+          commit('PROCESS_DELETE', response.data.question)
+          router.push({name: 'QuestionList'})
+          swal({
+            text: `${response.data.message}`,
+            icon: 'success',
+            button: 'next'
+          })
+          console.log(response.data.question, 'ini kedelete')
         })
         .catch(err => {
           swal({

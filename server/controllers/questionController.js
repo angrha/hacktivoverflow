@@ -111,6 +111,7 @@ class QuestionController {
           author: req.decoded.id,
           answer: req.body.answer
         })
+        console.log(answer, 'ini answer')
         answer.save()
           .then(answerResult => {
             // push answer id to answers

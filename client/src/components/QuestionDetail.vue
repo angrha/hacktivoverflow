@@ -8,7 +8,7 @@
             <v-btn icon>
               <v-icon>far fa-edit</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn @click="delQuestion(id)" icon>
               <v-icon>fas fa-trash</v-icon>
             </v-btn>
         </v-toolbar>
@@ -44,10 +44,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getDetailQuestion'
+      'getDetailQuestion',
+      'delQuestion'
     ])
   },
   created () {
+    this.getDetailQuestion(this.id)
+  },
+  updated () {
     this.getDetailQuestion(this.id)
   }
 }

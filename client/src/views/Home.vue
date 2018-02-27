@@ -36,7 +36,6 @@ export default {
 .bg-home {
   background-image: url('../assets/question.jpg');
   background-size: cover;
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

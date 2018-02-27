@@ -122,6 +122,25 @@ const store = new Vuex.Store({
           })
           console.log(err)
         })
+    },
+    addAnswer ({ commit }, payload) {
+      console.log(payload.id, 'ini patlsaidjsad id')
+      axios.put(baseUrl + `/questions/${payload.id}/answer`, payload.answer, {
+        headers: {
+          token: localStorage.getItem(overflow)
+        }
+      })
+        .then(response => {
+          console.log(response.data.answer, 'ini jawaban sodara')
+        })
+        .catch(err => {
+          swal({
+            text: `${err}`,
+            icon: 'error',
+            button: 'next'
+          })
+          console.log(err)
+        })
     }
   }
 })

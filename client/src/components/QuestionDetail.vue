@@ -5,6 +5,12 @@
         <v-toolbar dense>
           <v-toolbar-title>{{ detailQuestion.title }}</v-toolbar-title>
           <v-spacer></v-spacer>
+            <v-btn icon>
+              <v-icon>far fa-edit</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>fas fa-trash</v-icon>
+            </v-btn>
         </v-toolbar>
         <v-card-title primary-title>
           <div>
@@ -12,29 +18,25 @@
           </div>
         </v-card-title>
       </v-card>
-      <!-- answer -->
-        <v-container>
-          <v-card v-for="list in detailQuestion.answers" :key="list._id">
-            <v-toolbar dense>
-              <v-toolbar-title>INI BUAT USERNAME ANSWER</v-toolbar-title>
-              <v-spacer></v-spacer>
-            </v-toolbar>
-            <v-card-title primary-title>
-              <div>
-                <h4>{{ list.answer }}</h4>
-              </div>
-            </v-card-title>
-          </v-card>
-      </v-container>
+      <!-- list answer -->
+      <ListAnswer/>
+      <!-- post answer -->
+      <PostAnswer :id="id"/>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import ListAnswer from '@/components/ListAnswer'
+import PostAnswer from '@/components/PostAnswer'
 export default {
   name: 'QuestionDetail',
   props: ['id'],
+  components: {
+    ListAnswer,
+    PostAnswer
+  },
   computed: {
     ...mapState([
       'detailQuestion'

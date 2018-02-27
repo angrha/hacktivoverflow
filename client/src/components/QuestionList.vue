@@ -1,6 +1,6 @@
 <template>
- <v-layout row style="margin-top: 5%;">
-    <v-flex xs12 sm6 md8>
+ <v-layout flex sm8>
+    <v-flex xs12>
       <v-card>
         <v-list two-line>
           <template v-for="(question, index) in questions" :question="question">

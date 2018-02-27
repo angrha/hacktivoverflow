@@ -2,7 +2,10 @@
   <div class="bg-home">
     <Navbar/>
     <v-container fluid>
-      <router-view></router-view>
+      <div class="flx-hm">
+        <router-view></router-view>
+        <PostQuestion/>
+      </div>
     </v-container>
   </div>
 </template>
@@ -10,9 +13,11 @@
 <script>
 import { mapActions } from 'vuex'
 import Navbar from '@/components/Navbar'
+import PostQuestion from '@/components/PostQuestion'
 export default {
   components: {
-    Navbar
+    Navbar,
+    PostQuestion
   },
   methods: {
     ...mapActions([
@@ -36,5 +41,12 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.flx-hm {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 60px;
 }
 </style>

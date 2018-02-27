@@ -32,7 +32,7 @@ const store = new Vuex.Store({
         .then(response => {
           localStorage.setItem(overflow, response.data.token)
           commit('SET_LOGIN', true)
-          router.push({name: 'Home'})
+          router.push({name: 'QuestionList'})
         })
         .catch(err => {
           swal({
@@ -89,6 +89,7 @@ const store = new Vuex.Store({
       console.log(id, 'ini ideeee')
       axios.get(baseUrl + `/questions/${id}`)
         .then(response => {
+          console.log('sadklsakdlsald', response.data.question)
           commit('LOAD_DETAIL_QUESTION', response.data.question)
         })
         .catch(err => {

@@ -1,21 +1,31 @@
 <template>
-  <v-layout style="margin-top: 5%;">
-    <v-flex xs12 sm6 md8>
+  <v-layout flex sm8>
+    <v-flex xs12 sm12>
       <v-card>
+        <v-toolbar dense>
+          <v-toolbar-title>{{ detailQuestion.title }}</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">{{ detailQuestion.title }}</h3>
             <div>{{ detailQuestion.desc }}</div>
           </div>
         </v-card-title>
-        <v-divider></v-divider>
-      <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-0">INI NTAR BUAT LIST ANSWER</h3>
-            <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
-          </div>
-        </v-card-title>
       </v-card>
+      <!-- answer -->
+        <v-container>
+          <v-card v-for="list in detailQuestion.answers" :key="list._id">
+            <v-toolbar dense>
+              <v-toolbar-title>INI BUAT USERNAME ANSWER</v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
+            <v-card-title primary-title>
+              <div>
+                <h4>{{ list.answer }}</h4>
+              </div>
+            </v-card-title>
+          </v-card>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>

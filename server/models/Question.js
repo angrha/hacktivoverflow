@@ -23,7 +23,8 @@ const questionSchema = new Schema({
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User'
-    }
+    },
+    thumbs: Boolean
   }]
 }, {
   timestamps: true

@@ -51,12 +51,12 @@ export default {
       'delAnswer',
       'getDetailQuestion'
     ])
-  },
-  watch: {
-    detailQuestion: function () {
-      this.getDetailQuestion(this.id)
-    }
   }
+  // watch: {
+  //   detailQuestion: function () {
+  //     this.getDetailQuestion(this.id)
+  //   }
+  // }
 }
 </script>
 

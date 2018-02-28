@@ -194,14 +194,16 @@ const store = new Vuex.Store({
         })
     },
     voteQuestion ({ commit }, payload) {
-      axios.put(baseUrl + `/questions/${payload.id}/votes`, {}, {
+      axios.put(baseUrl + `/questions/${payload.id}/votes`, {
+        thumbs: payload.thumbs
+      }, {
         headers: {
           token: localStorage.getItem(overflow)
         }
       })
         .then(response => {
-          console.log(response.data.vote.votes, 'ini votes')
-          commit('COUNT_QUESTION_VOTES', response.data.vote.votes)
+          console.log(response.data, 'ini votes')
+          commit('COUNT_QUESTION_VOTES', response.data.question.votes)
         })
         .catch(err => {
           swal({

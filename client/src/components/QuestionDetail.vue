@@ -77,7 +77,12 @@ export default {
       this.voteQuestion(payload)
     },
     downQuestion () {
-      console.log('down')
+      this.thumbs = false
+      let payload = {
+        id: this.id,
+        thumbs: this.thumbs
+      }
+      this.voteQuestion(payload)
     }
   },
   created () {

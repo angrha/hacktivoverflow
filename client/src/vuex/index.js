@@ -13,7 +13,8 @@ const store = new Vuex.Store({
   state: {
     isLogin: false,
     questions: [],
-    detailQuestion: {}
+    detailQuestion: {},
+    quantityVotesQuestion: 0
   },
   mutations: {
     SET_LOGIN (state, payload) {
@@ -33,6 +34,9 @@ const store = new Vuex.Store({
         return x._id === payload
       })
       state.questions.splice(index, 1)
+    },
+    COUNT_QUESTION_VOTES (state, payload) {
+      state.quantityVotesQuestion = payload.length
     }
   },
   actions: {
@@ -179,6 +183,25 @@ const store = new Vuex.Store({
       })
         .then(response => {
           console.log(response.data.message)
+        })
+        .catch(err => {
+          swal({
+            text: `${err}`,
+            icon: 'error',
+            button: 'next'
+          })
+          console.log(err)
+        })
+    },
+    voteQuestion ({ commit }, payload) {
+      axios.put(baseUrl + `/questions/${payload.id}/votes`, {}, {
+        headers: {
+          token: localStorage.getItem(overflow)
+        }
+      })
+        .then(response => {
+          console.log(response.data.vote.votes, 'ini votes')
+          commit('COUNT_QUESTION_VOTES', response.data.vote.votes)
         })
         .catch(err => {
           swal({

@@ -20,16 +20,20 @@
         <v-card-actions>
           <v-container style="padding-top: 0px;">
             <div class="flx-thumb">
-              <h3 class="thmb-up">0 </h3>
-              <v-icon class="cr"> far fa-thumbs-up </v-icon>
-              <h3 class="thmb-dwn">0 </h3>
-              <v-icon class="cr"> far fa-thumbs-down </v-icon>
+              <h3> {{ quantityVotesQuestion }} </h3>
+              <v-btn @click="upQuestion" icon>
+                <v-icon > far fa-thumbs-up </v-icon>
+              </v-btn>
+              <h3>0 </h3>
+              <v-btn @click="downQuestion" icon>
+                <v-icon> far fa-thumbs-down </v-icon>
+              </v-btn>
             </div>
           </v-container>
         </v-card-actions>    
       </v-card>
       <!-- list answer -->
-      <ListAnswer/>
+      <ListAnswer :id="id"/>
       <!-- post answer -->
       <PostAnswer :id="id"/>
     </v-flex>
@@ -43,25 +47,40 @@ import PostAnswer from '@/components/PostAnswer'
 export default {
   name: 'QuestionDetail',
   props: ['id'],
+  data () {
+    return {
+      thumbs: false
+    }
+  },
   components: {
     ListAnswer,
     PostAnswer
   },
   computed: {
     ...mapState([
-      'detailQuestion'
+      'detailQuestion',
+      'quantityVotesQuestion'
     ])
   },
   methods: {
     ...mapActions([
       'getDetailQuestion',
-      'delQuestion'
-    ])
+      'delQuestion',
+      'voteQuestion'
+    ]),
+    upQuestion () {
+      this.thumbs = true
+      let payload = {
+        id: this.id,
+        thumbs: this.thumbs
+      }
+      this.voteQuestion(payload)
+    },
+    downQuestion () {
+      console.log('down')
+    }
   },
   created () {
-    this.getDetailQuestion(this.id)
-  },
-  updated () {
     this.getDetailQuestion(this.id)
   }
 }

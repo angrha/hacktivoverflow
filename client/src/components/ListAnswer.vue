@@ -20,10 +20,14 @@
         <v-card-actions>
           <v-container style="padding-top: 0px;">
             <div class="flx-thumb">
-              <h3 class="thmb-up">0 </h3>
-              <v-icon class="cr"> far fa-thumbs-up </v-icon>
-              <h3 class="thmb-dwn">0 </h3>
-              <v-icon class="cr"> far fa-thumbs-down </v-icon>
+              <h3>0 </h3>
+              <v-btn icon>
+                <v-icon> far fa-thumbs-up </v-icon>
+              </v-btn>
+              <h3>0 </h3>
+              <v-btn icon>
+                <v-icon> far fa-thumbs-down </v-icon>
+              </v-btn>
             </div>
           </v-container>
         </v-card-actions>
@@ -36,6 +40,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
+  props: ['id'],
   computed: {
     ...mapState([
       'detailQuestion'
@@ -43,8 +48,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'delAnswer'
+      'delAnswer',
+      'getDetailQuestion'
     ])
+  },
+  watch: {
+    detailQuestion: function () {
+      this.getDetailQuestion(this.id)
+    }
   }
 }
 </script>
@@ -60,19 +71,6 @@ export default {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
-}
-
-.cr {
-  cursor: pointer;
-}
-
-.thmb-up {
-  padding-right: 5px;
-}
-
-.thmb-dwn {
-  padding-right: 5px;
-  padding-left: 5px;
+  align-items: center;
 }
 </style>

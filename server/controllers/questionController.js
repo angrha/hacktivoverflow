@@ -138,6 +138,27 @@ class QuestionController {
         res.send(err)
       })
   }
+
+  // vote question
+  static vote(req, res) {
+    Question.findByIdAndUpdate(req.params.id, {
+      $push: {
+        votes: {
+          author: req.decoded.id
+        }
+      }
+    })
+      .then(vote => {
+        res.status(200).json({
+          message: 'success vote',
+          vote: vote
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err)
+      }) 
+  }
   
 }
 

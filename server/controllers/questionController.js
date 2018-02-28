@@ -138,54 +138,35 @@ class QuestionController {
         res.send(err)
       })
   }
-
-  // vote question
-  // static vote(req, res) {
-  //   Question.findByIdAndUpdate(req.params.id, {
-  //     $push: {
-  //       votes: {
-  //         author: req.decoded.id
-  //       }
-  //     }
-  //   })
-  //     .then(vote => {
-  //       res.status(200).json({
-  //         message: 'success vote',
-  //         vote: vote
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //       res.send(err)
-  //     }) 
-  // }
+  
   static vote (req, res) {
     Question.findById(req.params.id)
       .then(question => {
-        let obj = {
-          author: req.decoded.id,
-          thumbs: req.body.thumbs
-        }
-        let index = question.votes.findIndex(x => {
-          return x.author == req.decoded.id
-        })
-        if (index != -1) {
-          if (question.votes[index].thumbs == req.body.thumbs) {
+
+        if (req.body.thumbs) {
+          let index = question.votesUp.findIndex(x => {
+            return x.author == req.decoded.id
+          })
+          if (index != -1) {
             return res.status(401).json({
               message: 'you cannot votes more than once'
             })
           } else {
-            if (req.body.thumbs == false) {
-              question.votes.splice(index, 1)
-            } else {
-              console.log('lalala')
-            }
-            console.log('ini beda jempol', req.body.thumbs)
+            question.votesUp.push({author: req.decoded.id})
           }
-         
-        }
+        } else {
+          let index = question.votesDown.findIndex(x => {
+            return x.author == req.decoded.id
+          })
 
-       question.votes.push(obj)
+          if (index != -1) {
+            return res.status(401).json({
+              message: 'you cannot votes more than once'
+            })
+          } else {
+            question.votesDown.push({author: req.decoded.id})
+          }
+        }
         question.save()
           .then(insertedVote => {
             res.status(200).json({

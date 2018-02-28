@@ -20,11 +20,11 @@
         <v-card-actions>
           <v-container style="padding-top: 0px;">
             <div class="flx-thumb">
-              <h3> {{ quantityVotesQuestion }} </h3>
+              <h3> {{ VotesUpQuestion }} </h3>
               <v-btn @click="upQuestion" icon>
                 <v-icon > far fa-thumbs-up </v-icon>
               </v-btn>
-              <h3>0 </h3>
+              <h3> {{ VotesDownQuestion }} </h3>
               <v-btn @click="downQuestion" icon>
                 <v-icon> far fa-thumbs-down </v-icon>
               </v-btn>
@@ -59,7 +59,8 @@ export default {
   computed: {
     ...mapState([
       'detailQuestion',
-      'quantityVotesQuestion'
+      'VotesUpQuestion',
+      'VotesDownQuestion'
     ])
   },
   methods: {

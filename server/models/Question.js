@@ -19,12 +19,17 @@ const questionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Answer'
   }],
-  votes: [{
+  votesUp: [{
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User'
-    },
-    thumbs: Boolean
+    }
+  }],
+  votesDown: [{
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
   }]
 }, {
   timestamps: true

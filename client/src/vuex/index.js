@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     isLogin: false,
     questions: [],
     detailQuestion: {},
-    quantityVotesQuestion: 0
+    VotesDownQuestion: 0,
+    VotesUpQuestion: 0
   },
   mutations: {
     SET_LOGIN (state, payload) {
@@ -35,8 +36,11 @@ const store = new Vuex.Store({
       })
       state.questions.splice(index, 1)
     },
-    COUNT_QUESTION_VOTES (state, payload) {
-      state.quantityVotesQuestion = payload.length
+    COUNT_QUESTION_VOTESUP (state, payload) {
+      state.VotesUpQuestion = payload.length
+    },
+    COUNT_QUESTION_VOTESDOWN (state, payload) {
+      state.VotesDownQuestion = payload.length
     }
   },
   actions: {
@@ -203,7 +207,8 @@ const store = new Vuex.Store({
       })
         .then(response => {
           console.log(response.data, 'ini votes')
-          commit('COUNT_QUESTION_VOTES', response.data.question.votes)
+          commit('COUNT_QUESTION_VOTESUP', response.data.question.votesUp)
+          commit('COUNT_QUESTION_VOTESDOWN', response.data.question.votesDown)
         })
         .catch(err => {
           swal({

@@ -7,7 +7,13 @@ const answerSchema = new Schema({
     ref: 'User'
   },
   answer: String,
-  votes: [{
+  votesUp: [{
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  }],
+  votesDown: [{
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User'

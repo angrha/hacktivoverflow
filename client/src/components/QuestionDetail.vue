@@ -17,6 +17,16 @@
             <div>{{ detailQuestion.desc }}</div>
           </div>
         </v-card-title>
+        <v-card-actions>
+          <v-container style="padding-top: 0px;">
+            <div class="flx-thumb">
+              <h3 class="thmb-up">0 </h3>
+              <v-icon class="cr"> far fa-thumbs-up </v-icon>
+              <h3 class="thmb-dwn">0 </h3>
+              <v-icon class="cr"> far fa-thumbs-down </v-icon>
+            </div>
+          </v-container>
+        </v-card-actions>    
       </v-card>
       <!-- list answer -->
       <ListAnswer/>

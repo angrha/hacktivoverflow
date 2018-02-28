@@ -7,7 +7,7 @@
             <div class="flx-c">
               <h4 class="headline mb-0">{{ list.author }}</h4>
               <v-spacer></v-spacer>
-              <v-btn icon>
+              <v-btn @click="delAnswer(list._id)" icon>
                 <v-icon>far fa-trash-alt</v-icon>
               </v-btn>
             </div>
@@ -26,11 +26,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapState([
       'detailQuestion'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'delAnswer'
     ])
   }
 }

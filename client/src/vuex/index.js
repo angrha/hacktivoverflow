@@ -30,9 +30,9 @@ const store = new Vuex.Store({
     },
     PROCESS_DELETE (state, payload) {
       let index = state.questions.findIndex(x => {
-        return x === payload
+        return x._id === payload
       })
-      console.log(index, 'ini index')
+      state.questions.splice(index, 1)
     }
   },
   actions: {
@@ -119,7 +119,8 @@ const store = new Vuex.Store({
         })
         .catch(err => {
           swal({
-            text: `${err}`,
+            title: 'you need login to post new question',
+            text: `${err.response.data.message}`,
             icon: 'error',
             button: 'next'
           })
@@ -135,7 +136,6 @@ const store = new Vuex.Store({
         }
       })
         .then(response => {
-          console.log(response.data.question, 'ini jawaban sodara')
           commit('LOAD_DETAIL_QUESTION', response.data.question)
         })
         .catch(err => {
@@ -148,21 +148,37 @@ const store = new Vuex.Store({
         })
     },
     delQuestion ({ commit }, id) {
-      console.log(id, 'ini id question')
+      commit('PROCESS_DELETE', id)
       axios.delete(baseUrl + `/questions/${id}`, {
         headers: {
           token: localStorage.getItem(overflow)
         }
       })
         .then(response => {
-          commit('PROCESS_DELETE', response.data.question)
           router.push({name: 'QuestionList'})
           swal({
             text: `${response.data.message}`,
             icon: 'success',
             button: 'next'
           })
-          console.log(response.data.question, 'ini kedelete')
+        })
+        .catch(err => {
+          swal({
+            text: `${err}`,
+            icon: 'error',
+            button: 'next'
+          })
+          console.log(err)
+        })
+    },
+    delAnswer ({ commit }, id) {
+      axios.delete(baseUrl + `/answers/${id}`, {
+        headers: {
+          token: localStorage.getItem(overflow)
+        }
+      })
+        .then(response => {
+          console.log(response.data.message)
         })
         .catch(err => {
           swal({

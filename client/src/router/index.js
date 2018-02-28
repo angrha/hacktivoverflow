@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/views/LandingPage'
-import Home from '@/views/Home'
+import Questions from '@/views/Questions'
 import QuestionList from '@/components/QuestionList'
 import QuestionDetail from '@/components/QuestionDetail'
 
@@ -15,8 +15,8 @@ export default new Router({
       component: LandingPage
     },
     {
-      path: '/home',
-      component: Home,
+      path: '/questions',
+      component: Questions,
       children: [
         {
           path: '',

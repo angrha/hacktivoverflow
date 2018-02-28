@@ -3,7 +3,7 @@
     <Navbar/>
     <v-container fluid>
       <div class="flx-hm">
-        <router-view></router-view>
+        <router-view v-show="questions.length > 0" ></router-view>
         <PostQuestion/>
       </div>
     </v-container>
@@ -11,13 +11,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Navbar from '@/components/Navbar'
 import PostQuestion from '@/components/PostQuestion'
 export default {
   components: {
     Navbar,
     PostQuestion
+  },
+  computed: {
+    ...mapState([
+      'questions'
+    ])
   },
   methods: {
     ...mapActions([

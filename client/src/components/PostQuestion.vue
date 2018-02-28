@@ -59,11 +59,13 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addQuestion'
+      'addQuestion',
+      'getAllQuestion'
     ]),
     postQuestion (form) {
       this.addQuestion(form)
         .then(() => {
+          this.getAllQuestion()
           this.form.title = ''
           this.form.desc = ''
           this.dialog = false

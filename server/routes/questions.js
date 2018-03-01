@@ -11,5 +11,6 @@ router.delete('/:id', isLogin, Question.delete)
 // insert answer in routing question
 router.put('/:id/answer', isLogin, Question.insertAnswer)
 router.put('/:id/votes', isLogin, Question.vote)
+router.get('/:id/votes', Question.getVotes)
 
 module.exports = router

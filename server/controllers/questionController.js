@@ -184,6 +184,21 @@ class QuestionController {
         res.send(err)
       }) 
   }
+
+  static getVotes (req, res) {
+    Question.findById(req.params.id)
+      .then(question => {
+        res.status(200).json({
+          message: 'list votes',
+          votesUp: question.votesUp,
+          votesDown: question.votesDown
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err)
+      }) 
+  }
   
 }
 

@@ -7,7 +7,7 @@
             <v-list-tile avatar ripple :key="index">
               <v-list-tile-content>
                 <router-link :to="{ name: 'QuestionDetail', params: { id: question._id } }">
-                <v-list-tile-title>{{ question.title }}</v-list-tile-title>
+                <v-list-tile-title >{{ question.title }}</v-list-tile-title>
                 </router-link>
                 <v-list-tile-sub-title class="text--primary">{{ question.desc.substr(0, 100) }}...</v-list-tile-sub-title>
               </v-list-tile-content>

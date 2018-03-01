@@ -212,8 +212,23 @@ const store = new Vuex.Store({
         })
         .catch(err => {
           swal({
-            text: `${err}`,
-            icon: 'error',
+            text: `${err.response.data.message}`,
+            icon: 'warning',
+            button: 'next'
+          })
+          console.log(err)
+        })
+    },
+    getVotesQuestion ({ commit }, id) {
+      axios.get(baseUrl + `/questions/${id}/votes`)
+        .then(response => {
+          commit('COUNT_QUESTION_VOTESUP', response.data.votesUp)
+          commit('COUNT_QUESTION_VOTESDOWN', response.data.votesDown)
+        })
+        .catch(err => {
+          swal({
+            text: `${err.response.data.message}`,
+            icon: 'warning',
             button: 'next'
           })
           console.log(err)

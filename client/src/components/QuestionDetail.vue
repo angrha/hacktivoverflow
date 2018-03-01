@@ -67,7 +67,8 @@ export default {
     ...mapActions([
       'getDetailQuestion',
       'delQuestion',
-      'voteQuestion'
+      'voteQuestion',
+      'getVotesQuestion'
     ]),
     upQuestion () {
       this.thumbs = true
@@ -88,6 +89,7 @@ export default {
   },
   created () {
     this.getDetailQuestion(this.id)
+    this.getVotesQuestion(this.id)
   }
 }
 </script>

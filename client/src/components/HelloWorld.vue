@@ -27,7 +27,7 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 9px;
 }
 a {
   color: #42b983;
